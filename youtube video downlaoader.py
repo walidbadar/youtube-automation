@@ -6,7 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from pytube import YouTube
-import re, time, requests, json, datetime
+from datetime import datetime
+import os, re, time, requests, json
 
 def youtube_video_downlaoader(topic,linkorder):
     global driver
@@ -43,18 +44,21 @@ def youtube_video_downlaoader(topic,linkorder):
     #print(searchedlinks)
     linklist = re.findall("href\=\"\/watch\?v=(.*?)\"", searchedlinks, re.M)  # dollar price
     linklist = list(dict.fromkeys(linklist))
-    print(linklist)
+    #print(linklist)
     driver.quit()
 
     # Download Video from Links
     yt = YouTube("https://www.youtube.com/watch?v="+linklist[linkorder]+"\"")
     d_video = yt.streams.get_by_itag(22)
     # d_video.download(filename=str(linkorder)+".mp4")
-    d_video.download()
-    print('Video Dowloaded!')
+    d_video.download('video')
+    #print('Video Dowloaded!')
 
-try:
-    youtube_video_downlaoader("physcology",0)
+while 1:
+    try:
+        youtube_video_downlaoader("physcology",0)
+        time.sleep(1800)
 
-except:
-    print("Some Error")
+    except:
+        print("Some Error")
+        time.sleep(300)
