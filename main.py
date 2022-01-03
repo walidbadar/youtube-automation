@@ -51,8 +51,8 @@ def youtube_video_downloader(topic,linkorder):
     yt = YouTube("https://www.youtube.com/watch?v="+linklist[linkorder]+"\"")
     d_video = yt.streams.get_by_itag(22)
     # d_video.download(filename=str(linkorder)+".mp4")
-    d_video.download('video')
-    #print('Video Dowloaded!')
+    d_video.download('Videos')
+    print('Video Dowloaded!')
 
 while 1:
     try:
