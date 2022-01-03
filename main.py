@@ -23,40 +23,49 @@ def youtube_video_downloader(topic,linkorder):
     xpath_searchBar = '//input[@id="search"]'
     WebDriverWait(driver, 60).until(expected_conditions.presence_of_element_located((By.XPATH, xpath_searchBar)))
     uid_input = driver.find_element_by_xpath(xpath_searchBar)
-    uid_input.send_keys(topic)  # Bitcoin416
-    time.sleep(1)
+    uid_input.send_keys(topic)
+    driver.implicitly_wait(1)
     uid_input.send_keys(Keys.ENTER)
 
     # Click on Filter Button
-    xpath_searchButton = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[1]/div[2]/ytd-search-sub-menu-renderer/div[1]/div/ytd-toggle-button-renderer/a/tp-yt-paper-button/yt-icon'
-    WebDriverWait(driver, 60).until(expected_conditions.presence_of_element_located((By.XPATH, xpath_searchButton)))
-    driver.find_element_by_xpath(xpath_searchButton).click()
-    driver.implicitly_wait(1)
+    xpath_filterButton = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[1]/div[2]/ytd-search-sub-menu-renderer/div[1]/div/ytd-toggle-button-renderer/a/tp-yt-paper-button/yt-icon'
+    WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath_filterButton)))
+    driver.find_element_by_xpath(xpath_filterButton).click()
 
     # Use Creative Common Filter
-    xpath_filterButton = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[1]/div[2]/ytd-search-sub-menu-renderer/div[1]/iron-collapse/div/ytd-search-filter-group-renderer[4]/ytd-search-filter-renderer[5]/a/div/yt-formatted-string'
-    WebDriverWait(driver, 60).until(expected_conditions.presence_of_element_located((By.XPATH, xpath_filterButton)))
+    xpath_creativeCommon = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[1]/div[2]/ytd-search-sub-menu-renderer/div[1]/iron-collapse/div/ytd-search-filter-group-renderer[4]/ytd-search-filter-renderer[5]/a/div/yt-formatted-string'
+    WebDriverWait(driver, 60).until(expected_conditions.presence_of_element_located((By.XPATH, xpath_creativeCommon)))
+    driver.find_element_by_xpath(xpath_creativeCommon).click()
+
+    # Click on Filter Button
+    driver.get(driver.current_url)
+    WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath_filterButton)))
     driver.find_element_by_xpath(xpath_filterButton).click()
+
+    # Sort Videos by Upload Date
+    xpath_sortButton = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[1]/div[2]/ytd-search-sub-menu-renderer/div[1]/iron-collapse/div/ytd-search-filter-group-renderer[5]/ytd-search-filter-renderer[2]/a/div/yt-formatted-string'
+    WebDriverWait(driver, 60).until(expected_conditions.presence_of_element_located((By.XPATH, xpath_sortButton)))
+    driver.find_element_by_xpath(xpath_sortButton).click()
 
     # Search Video Links
     driver.get(driver.current_url)
     searchedlinks = driver.page_source
-    #print(searchedlinks)
+    # print(searchedlinks)
     linklist = re.findall("href\=\"\/watch\?v=(.*?)\"", searchedlinks, re.M)  # dollar price
     linklist = list(dict.fromkeys(linklist))
-    #print(linklist)
+    # print(linklist)
     driver.quit()
 
     # Download Video from Links
     yt = YouTube("https://www.youtube.com/watch?v="+linklist[linkorder]+"\"")
     d_video = yt.streams.get_by_itag(22)
     # d_video.download(filename=str(linkorder)+".mp4")
-    d_video.download('Videos')
+    d_video.download('video')
     print('Video Dowloaded!')
 
 while 1:
     try:
-        youtube_video_downloader("physcology",0)
+        youtube_video_downloader("psychology",0)
         time.sleep(1800)
 
     except:
