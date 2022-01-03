@@ -9,7 +9,7 @@ from pytube import YouTube
 from datetime import datetime
 import os, re, time, requests, json
 
-def youtube_video_downlaoader(topic,linkorder):
+def youtube_video_downloader(topic,linkorder):
     global driver
 
     options = Options()
@@ -56,7 +56,7 @@ def youtube_video_downlaoader(topic,linkorder):
 
 while 1:
     try:
-        youtube_video_downlaoader("physcology",0)
+        youtube_video_downloader("physcology",0)
         time.sleep(1800)
 
     except:
