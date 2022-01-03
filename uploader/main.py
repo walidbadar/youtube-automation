@@ -60,6 +60,11 @@ while 1:
                     body=request_body,
                     media_body=MediaFileUpload(path+list[i])
                 ).execute()
+                
+                pastvalue = open('videoCount.txt', "w")
+                pastvalue.write(str(pastVideoCount))
+                pastvalue.close()
+                
                 os.system("del " "\"D:\\Softwares\\Waleed Docs\\Projects\\Selenium\\Youtube Automation\\Youtube Downloader\\Videos\\" + list[i] +"\"")
                 time.sleep(60)
 
