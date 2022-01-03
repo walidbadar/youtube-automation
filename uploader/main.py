@@ -54,16 +54,17 @@ while 1:
         if pastVideoCount<=6:
             try:
                 print("Uploading Video " + str(x))
-
+                
+                pastvalue = open('videoCount.txt', "w")
+                pastvalue.write(str(pastVideoCount))
+                pastvalue.close()
+                
                 response_upload = service.videos().insert(
                     part='snippet,status',
                     body=request_body,
                     media_body=MediaFileUpload(path+list[i])
                 ).execute()
-                
-                pastvalue = open('videoCount.txt', "w")
-                pastvalue.write(str(pastVideoCount))
-                pastvalue.close()
+
                 
                 os.system("del " "\"D:\\Softwares\\Waleed Docs\\Projects\\Selenium\\Youtube Automation\\Youtube Downloader\\Videos\\" + list[i] +"\"")
                 time.sleep(60)
