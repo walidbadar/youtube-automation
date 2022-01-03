@@ -8,11 +8,15 @@ API_NAME = 'youtube'
 API_VERSION = 'v3'
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 
-path="D:/Softwares/Waleed Docs/Projects/Selenium/Youtube Automation/Videos/"
+path="D:/Softwares/Waleed Docs/Projects/Selenium/Youtube Automation/Youtube Downloader/Videos/"
 
 service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
 bootTime = datetime.now().strftime('%Y-%m-%d %H:%M')
-x=0
+
+with open(r'videoCount.txt', 'r') as pastvalue:
+    videoCount = [line.strip() for line in pastvalue]
+if len(videoCount) > 0:
+    pastVideoCount = int(videoCount[0])
 
 while 1:
     list = os.listdir(path)
@@ -26,17 +30,17 @@ while 1:
 
     if(currentdate - bootdate) >=1 or (currentdate - bootdate)<=-27:
         bootTime = datetime.now().strftime('%Y-%m-%d %H:%M')
-        x=0
+        pastVideoCount=0
         print("1 day elapsed")
 
     for i in range(len(list)):
-        x+=1
+        pastVideoCount+=1
         # print(list[i])
 
         request_body = {
             'snippet': {
                 'title': list[i],
-                'description': 'If you liked this video, remember to like and subscribe!',
+                'description': 'Making psychology and mental health content accessible for everyone.',
                 'tags': ['Psychology']
             },
             'status': {
@@ -47,7 +51,7 @@ while 1:
         }
         
         # 6 Videos will be uploaded to channel in a day and remaining video will continue from next day. 
-        if x<=6:
+        if pastVideoCount<=6:
             try:
                 print("Uploading Video " + str(x))
 
@@ -56,7 +60,7 @@ while 1:
                     body=request_body,
                     media_body=MediaFileUpload(path+list[i])
                 ).execute()
-                os.system("del " "\"D:\\Softwares\\Waleed Docs\\Projects\\Selenium\\Youtube Automation\\Videos\\" + list[i] +"\"")
+                os.system("del " "\"D:\\Softwares\\Waleed Docs\\Projects\\Selenium\\Youtube Automation\\Youtube Downloader\\Videos\\" + list[i] +"\"")
                 time.sleep(60)
 
             except:
