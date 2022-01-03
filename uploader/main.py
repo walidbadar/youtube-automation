@@ -8,7 +8,7 @@ API_NAME = 'youtube'
 API_VERSION = 'v3'
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 
-path="D:/Softwares/Waleed Docs/Projects/Selenium/Youtube Automation/video1/"
+path="D:/Softwares/Waleed Docs/Projects/Selenium/Youtube Automation/Videos/"
 
 service = Create_Service(CLIENT_SECRET_FILE, API_NAME, API_VERSION, SCOPES)
 bootTime = datetime.now().strftime('%Y-%m-%d %H:%M')
@@ -56,7 +56,7 @@ while 1:
                     body=request_body,
                     media_body=MediaFileUpload(path+list[i])
                 ).execute()
-                os.system("del " "\"D:\\Softwares\\Waleed Docs\\Projects\\Selenium\\Youtube Automation\\video1\\" + list[i] +"\"")
+                os.system("del " "\"D:\\Softwares\\Waleed Docs\\Projects\\Selenium\\Youtube Automation\\Videos\\" + list[i] +"\"")
                 time.sleep(60)
 
             except:
