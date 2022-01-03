@@ -3,7 +3,7 @@ from datetime import datetime
 from Google import Create_Service
 from googleapiclient.http import MediaFileUpload
 
-CLIENT_SECRET_FILE = "client_secret.json"
+CLIENT_SECRET_FILE = "client_secret.json" # Get client_secret.json file from cloud.google.com using Oauth ID verification method
 API_NAME = 'youtube'
 API_VERSION = 'v3'
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
