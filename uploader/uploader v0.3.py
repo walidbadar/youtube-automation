@@ -18,16 +18,16 @@ while 1:
     list = os.listdir(path)
     currentTime = datetime.now().strftime('%Y-%m-%d %H:%M')
 
-    print("bootTime " +bootTime)
-    print("currentTime " +currentTime)
+    # print("bootTime " +bootTime)
+    # print("currentTime " +currentTime)
 
-    bootdate = int(bootTime[14:16])
-    currentdate = int(currentTime[14:16])
+    bootdate = int(bootTime[8:10])
+    currentdate = int(currentTime[8:10])
 
-    if(currentdate - bootdate) >=10 or (currentdate - bootdate)<=-27:
+    if(currentdate - bootdate) >=1 or (currentdate - bootdate)<=-27:
         bootTime = datetime.now().strftime('%Y-%m-%d %H:%M')
         x=0
-        print("10 min elapsed")
+        print("1 day elapsed")
 
     for i in range(len(list)):
         x+=1
@@ -45,7 +45,8 @@ while 1:
             },
             'notifySubscribers': False
         }
-
+        
+        # 6 Videos will be uploaded to channel in a day and remaining video will continue from next day. 
         if x<=6:
             try:
                 print("Uploading Video " + str(x))
@@ -61,5 +62,5 @@ while 1:
             except:
                 print("Write operation timed out")
 
-    time.sleep(3)
+    time.sleep(60)
 
