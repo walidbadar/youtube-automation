@@ -71,8 +71,8 @@ def youtube_video_downloader(topic,linkorder):
 while 1:
     try:
         for i in range(20):
-                youtube_video_downloader("psychology",0)
-                time.sleep(1800)
+            youtube_video_downloader("psychology",i)
+            time.sleep(1800)
 
     except:
         print("Some Error")
