@@ -39,7 +39,7 @@ while 1:
 
         request_body = {
             'snippet': {
-                'title': list[i],
+                'title': list[i][0:len(list[i])-4],
                 'description': 'Making psychology and mental health content accessible for everyone.',
                 'tags': ['Psychology']
             },
