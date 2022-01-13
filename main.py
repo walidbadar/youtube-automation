@@ -43,15 +43,14 @@ def youtube_video_downloader(topic,linkorder):
     driver.find_element_by_xpath(xpath_creativeCommon).click()
 
     # Click on Filter Button
-    driver.get(driver.current_url)
-    WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath_filterButton)))
-    driver.find_element_by_xpath(xpath_filterButton).click()
+    # driver.get(driver.current_url)
+    # WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath_filterButton)))
+    # driver.find_element_by_xpath(xpath_filterButton).click()
 
     # Sort Videos by Upload Date
-    xpath_sortButton = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[1]/div[2]/ytd-search-sub-menu-renderer/div[1]/iron-collapse/div/ytd-search-filter-group-renderer[5]/ytd-search-filter-renderer[2]/a/div/yt-formatted-string'
-    WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath_sortButton)))
-    driver.find_element_by_xpath(xpath_sortButton).click()
-
+    # xpath_sortButton = '/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[1]/div[2]/ytd-search-sub-menu-renderer/div[1]/iron-collapse/div/ytd-search-filter-group-renderer[5]/ytd-search-filter-renderer[2]/a/div/yt-formatted-string'
+    # WebDriverWait(driver, 60).until(expected_conditions.element_to_be_clickable((By.XPATH, xpath_sortButton)))
+    
     # Search Video Links
     driver.get(driver.current_url)
     searchedlinks = driver.page_source
